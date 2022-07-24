@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="kuka">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.40217 0.45379 0.76837"
+        rpy="0 0 0" />
+      <mass
+        value="130.85" />
+      <inertia
+        ixx="4.8905"
+        ixy="0.037499"
+        ixz="-0.20711"
+        iyy="6.1291"
+        iyz="-0.00066682"
+        izz="6.0394" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.5 -0.46 -0.55"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.5 -0.46 -0.55"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="shoulder">
+    <inertial>
+      <origin
+        xyz="0.1341 0.0040556 0.19496"
+        rpy="0 0 0" />
+      <mass
+        value="69.695" />
+      <inertia
+        ixx="2.0818"
+        ixy="0.030673"
+        ixz="-1.0414"
+        iyy="3.7104"
+        iyz="0.029859"
+        izz="3.5065" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/shoulder.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.6 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/shoulder.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shoulder_joint"
+    type="revolute">
+    <origin
+      xyz="-0.05415 -0.002 0.45303"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="shoulder" />
+    <limit 
+      lower="-3.22" upper="3.22" effort="0.1" velocity="0.1"/>
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="elbow">
+    <inertial>
+      <origin
+        xyz="-2.6313E-05 -0.21861 0.56743"
+        rpy="0 0 0" />
+      <mass
+        value="67.938" />
+      <inertia
+        ixx="11.674"
+        ixy="0.00055482"
+        ixz="-0.006307"
+        iyy="11.834"
+        iyz="0.047876"
+        izz="0.59139" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/elbow.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.6 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/elbow.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="elbow_joint"
+    type="revolute">
+    <origin
+      xyz="0.35 0.025391 0.33485"
+      rpy="0 0.22851 0" />
+    <parent
+      link="shoulder" />
+    <child
+      link="elbow" />
+    <limit 
+      lower="-0.7848" upper="2.18" effort="0.1" velocity="0.1"/>
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="arm">
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="50.577" />
+      <inertia
+        ixx="2.0496"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="2.232"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/arm.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.6 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/arm.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="arm_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 1.2"
+      rpy="0 1.3377 0" />
+    <parent
+      link="elbow" />
+    <child
+      link="arm" />
+    <limit 
+      lower="-3.6624" upper="1.11616" effort="0.1" velocity="0.1"/>
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="grip">
+    <inertial>
+      <origin
+        xyz="0.1308 -1.3497E-05 -0.0056364"
+        rpy="0 0 0" />
+      <mass
+        value="3.8441" />
+      <inertia
+        ixx="0.008836"
+        ixy="2.9984E-06"
+        ixz="0.002949"
+        iyy="0.038511"
+        iyz="2.2393E-05"
+        izz="0.037838" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/grip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.6 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/grip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="grip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.145 0.03539 1.2788"
+      rpy="2.1965 -1.5708 0" />
+    <parent
+      link="arm" />
+    <child
+      link="grip" />
+    <limit 
+      lower="-6.104" upper="6.104" effort="0.1" velocity="0.1"/>
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="gripper">
+    <inertial>
+      <origin
+        xyz="0.047694 -0.0069413 4.1364E-05"
+        rpy="0 0 0" />
+      <mass
+        value="1.7852" />
+      <inertia
+        ixx="0.0085501"
+        ixy="0.00037793"
+        ixz="-4.341E-07"
+        iyy="0.006266"
+        iyz="-2.6017E-06"
+        izz="0.012173" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/gripper.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.6 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/gripper.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="gripper_joint"
+    type="revolute">
+    <origin
+      xyz="0.26625 0 0"
+      rpy="-1.5708 0 -0.95447" />
+    <parent
+      link="grip" />
+    <child
+      link="gripper" />
+    <limit 
+      lower="-3.8368" upper="2.2672" effort="0.1" velocity="0.1"/>
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="endeffector">
+    <inertial>
+      <origin
+        xyz="0.029397 -4.4409E-16 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.045176" />
+      <inertia
+        ixx="2.9389E-05"
+        ixy="-1.2134E-19"
+        ixz="-2.5835E-20"
+        iyy="1.5225E-05"
+        iyz="-2.4776E-20"
+        izz="1.5225E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/endeffector.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://kuka/meshes/endeffector.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="endeffector_joint"
+    type="continuous">
+    <origin
+      xyz="0.1219 0 0"
+      rpy="1.2409 0 0" />
+    <parent
+      link="gripper" />
+    <child
+      link="endeffector" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+</robot>
